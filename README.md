@@ -1,9 +1,5 @@
-Mui 投票
-========
 
-一款基于云原生开发的投票系统，依托于 Vercel 的部署环境。
-
-使用的技术和产品：
+在线存储和生成发票
 
 1. Nuxt.js
     1. 提供 Vue 开发环境
@@ -19,9 +15,3 @@ Mui 投票
 4. TiDB Cloud Serverless
     1. HTTP endpoint
     2. 免费额度足够用很久 
-5. 其它
-    1. Nuxt-i18n 
-    2. TailwindCSS
-    2. DaisyUI
-    3. GitHub
-    4. pnpm
