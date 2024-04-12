@@ -11,45 +11,43 @@
   </div>
 </template>
 <script setup>
-import Invoice from '../components/Invoice.vue'
-import generatePdf from '../utils/generatePdf'
-import InvoiceForm from '../components/InvoiceForm.vue'
-const path = route.path
-const { data: rateData, pending } = await useFetch('/api/rate', {
+import Invoice from "../components/Invoice.vue";
+import generatePdf from "../utils/generatePdf";
+import InvoiceForm from "../components/InvoiceForm.vue";
+// const path = route.path;
+const { data: rateData, pending } = await useFetch("/api/rate", {
   query: {
-    uid: path,
+    uid: 1,
   },
-  // default() {
-  //   return { r1: 0, r2: 0, r3: 0, r4: 0, r5: 0 };
-  // },
-})
-console.log(data, '----asdas')
-const invoiceGnForm = ref()
+});
+console.log(rateData, "-------data");
+
+const invoiceGnForm = ref();
 const initForm = () => {
   invoiceGnForm.value = {
-    name: '',
-    company: '',
-    email: '',
-    country: '',
-    zipCode: '',
-    addr: '',
-    userNote: '',
-    tax: '',
-    total: '',
-    invoiceDate: '',
-    product1: '',
-    product2: '',
-    price1: '',
-    price2: '',
-    billTo: '',
-    from: '',
-    quantity: '1',
-  }
-}
-initForm()
+    name: "",
+    company: "",
+    email: "",
+    country: "",
+    zipCode: "",
+    addr: "",
+    userNote: "",
+    tax: "",
+    total: "",
+    invoiceDate: "",
+    product1: "",
+    product2: "",
+    price1: "",
+    price2: "",
+    billTo: "",
+    from: "",
+    quantity: "1",
+  };
+};
+initForm();
 const toPdf = () => {
-  generatePdf(document.querySelector('.invoice-page'), invoiceGnForm.value.tax)
-}
+  generatePdf(document.querySelector(".invoice-page"), invoiceGnForm.value.tax);
+};
 </script>
 <style scoped lang="scss">
 .main-container {
