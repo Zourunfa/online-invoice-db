@@ -14,13 +14,36 @@
 import Invoice from "../components/Invoice.vue";
 import generatePdf from "../utils/generatePdf";
 import InvoiceForm from "../components/InvoiceForm.vue";
-// const path = route.path;
+const route = useRoute();
+const path = route.path;
+const invoicePostData = ref();
 const { data: rateData, pending } = await useFetch("/api/rate", {
   query: {
-    uid: 1,
+    uid: path,
+  },
+  default() {
+    return {
+      name: "",
+      company: "",
+      email: "",
+      country: "",
+      zipCode: "",
+      addr: "",
+      userNote: "",
+      tax: "",
+      total: "",
+      invoiceDate: "",
+      product1: "",
+      product2: "",
+      price1: "",
+      price2: "",
+      billTo: "",
+      from: "",
+      quantity: "1",
+    };
   },
 });
-console.log(rateData, "-------data");
+console.log(rateData, "-------data1");
 
 const invoiceGnForm = ref();
 const initForm = () => {
@@ -45,7 +68,19 @@ const initForm = () => {
   };
 };
 initForm();
-const toPdf = () => {
+const toPdf = async () => {
+  try {
+    const data = await $fetch("/api/invoice", {
+      method: "POST",
+      body: {
+        uid: path,
+        rate: invoiceGnForm.value,
+      },
+    });
+    invoicePostData.value = data;
+  } catch (e) {
+    message.value = e.message || Object.prototype.toString.call(e);
+  }
   generatePdf(document.querySelector(".invoice-page"), invoiceGnForm.value.tax);
 };
 </script>

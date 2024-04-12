@@ -16,13 +16,8 @@ export default defineEventHandler(async function (event) {
       statusMessage: 'Failed to fetch stored data. ' + ((e as Error).message || Object.prototype.toString.call(e)),
     })
   }
+  console.log(body.rate, '---body.rate')
 
-  const key = `r${body.rate}` as keyof RateData
-  data[key] += 1
-  if (body.oldRate) {
-    const key = `r${body.oldRate}` as keyof RateData
-    data[key] -= 1
-  }
   // backup data by hour
   const hour = getHour(Date.now())
   const stored = JSON.stringify(data)

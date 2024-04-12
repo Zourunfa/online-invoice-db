@@ -10,6 +10,7 @@ export default defineEventHandler(async function (event: H3Event): Promise<unkno
   let data
   try {
     data = await redis.get(redisKey)
+    console.log(data, '----getData')
   } catch (e) {
     throw createError({
       statusCode: 400,
